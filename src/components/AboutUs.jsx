@@ -1,8 +1,16 @@
 //Feel Free to know a little more about the developer
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export const AboutUs = () => {
+  const navigate = useNavigate();
+
   return (
-    <div>AboutUs</div>
+    <div><p>under development</p>
+    <div>
+        <button onClick={() => navigate("/")}>Back to Home</button>
+    </div>
+    </div>
+    
   )
 }
