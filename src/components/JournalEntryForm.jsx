@@ -43,6 +43,14 @@ const JournalEntryForm = () => {
           <input type="radio" name="myRadio" value="option3" />
           Angry
         </label>
+        <label>
+          <input type="radio" name="myRadio" value="option3" />
+          neutral
+        </label>
+        <label>
+          <input type="radio" name="myRadio" value="option3" />
+          excited
+        </label>
       </p>
       <div>
         <label>
