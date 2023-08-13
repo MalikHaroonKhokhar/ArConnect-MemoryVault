@@ -6,7 +6,7 @@ export const AboutUs = () => {
   const navigate = useNavigate();
 
   return (
-    <div><p>under development</p>
+    <div><p>Hi Im Haroon</p>
     <div>
         <button onClick={() => navigate("/")}>Back to Home</button>
     </div>

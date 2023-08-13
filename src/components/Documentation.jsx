@@ -15,11 +15,9 @@ export const Documentation = () => {
       <div>
         <h2 >Table of Contents</h2>
         <ul >
-          <li><a href="#Overview">1 Overview</a></li>
-          <li><a href="#background">1.2 Background</a></li>
-          <li><a href="#objectives">1.3 Objective(s)/Aim(s)/Target(s)</a></li>
-          <li><a href="#scope">1.4 Scope</a></li>
-          <li><a href="#goals">1.5 Business Goals</a></li>
+          <li><a href="#Overview">1) Overview</a></li>
+          <li><a href="#background">2) System Architecture</a></li>
+         
         </ul>
       </div>
 
@@ -27,58 +25,56 @@ export const Documentation = () => {
         <h1>Documentation</h1>
 
         <section >
-          <h2 >1.1 Product</h2>
+          <h2 >1) Overview</h2>
           <p>
-            Whenever we want to track past transaction history, it requires a lot of time because going through the Ethereum ledger block by block, starting from the Genesis Block, which is very time-consuming and slow in order to find relevant information.
-          </p>
+Memory Vault is a secure, decentralized journaling application where users can create, view, and manage their personal entries. It allows for a unique blend of text, voice, and image entries stored permanently          </p>
           <p>
-            The protocol saves developers tremendous amounts of storage and hours by creating reliable and efficient data feeds from the blockchain.
-          </p>
+on the Arweave network. Utilizing ArConnect for managing Arweave wallet interactions, Memory Vault offers a user-friendly interface, mood tracking, and customized reminders, creating a comprehensive journaling          </p>
           <p>
-            Also, many dApps (Decentralized applications) require a listening/indexing service, so they have to make one from scratch and run a custom server for it or use another service by paying in their native token. For end-users and web3 developers, if they require some data to be fetched, it is very convenient to write a desirable query to fetch data.
+            experience.
           </p>
-          <p>
-            So undeniably, a better approach is needed to overcome this issue.
-          </p>
+         
         </section>
 
         <section >
-          <h2>1.2 Background</h2>
+          <h2>2) System Architecture</h2>
           <p>
-            In the early days of the internet after the emergence of WWW (World Wide Web), suddenly, the public had easy access to an extensive amount of data. People soon realized they needed a mechanism to find their way through this flood of data. Due to this, search engines were created, e.g., Google. Now, after 20 years, the web3 space faces a similar issue that cannot be tackled using the traditional search engine and requires a trustless way to extract required information.
+The <strong>frontend</strong> is built using React.js and handles all user interactions. It contains the following key components:<br></br>
+
+1. <strong>ArConnect Integration Component:</strong> This manages user sign-in via ArConnect, enabling direct interaction with the user's Arweave wallet.<br></br>
+
+2. <strong>Dashboard/Entry List Component:</strong> This displays a list of journal entries, retrieved from the Arweave network using transaction IDs stored in MongoDB. It also provides options for filtering and searching entries.<br></br>
+
+3. <strong>Journal Entry Form Component:</strong> Users can create new entries (text, image, or voice note), add tags, record mood, and then submit them. Upon submission, entries are uploaded to Arweave using ArConnect, and the transaction ID is sent to the backend.<br></br>
+
+4. <strong>Entry Detail Component:</strong> This shows a more detailed view of a selected entry, including attached images or voice notes, and the mood associated with the entry. It also allows users to 'hide' an entry from their journal.<br></br>
+
+5. <strong>Mood Tracker Component:</strong> Displays a graph showing mood trends over time based on user entries. This data is fetched from MongoDB.<br></br>
+
+6. <strong>Settings/Reminder Component:</strong> This allows users to configure their reminder settings for regular entries.          </p>
+          <p>
+            The <strong> backend</strong> is built using Node.js and Express.js and serves to manage server-side logic:<br></br>
+
+- <strong>Routes/Controllers:</strong> Handles HTTP requests from the frontend, including storing new journal entry references (Arweave transaction IDs), retrieving journal entries, updating settings, and more.<br></br>
+
+- <strong>Reminder Service:</strong> A background service that sends reminder notifications to users based on their settings.<br></br>
           </p>
           <p>
-            The Graph is one of the leading providers, preparing the data for users and making it available to them. It provides a middle layer between various blockchains and decentralized applications. When creating decentralized applications, there needs to be a way to securely communicate data between the blockchain and the user-friendly front-end, plus the web of smart contracts structuring the application. This maintains the integrity of the web3 space and user's data.
+            <strong>MongoDB</strong> is used to store data, including:<br></br>
+
+- <strong>User Data:</strong> User credentials, settings, reminder configurations, and references to the Arweave transaction IDs of journal entries.<br></br>
+- <strong>Mood Data:</strong> Mood data for each entry, associated with the user ID and date.<br></br>
+          </p>
+          <p>
+            <strong>ArConnect</strong> is used on the frontend to manage users' Arweave wallets and facilitate transactions.<br></br>
+
+- <strong>Journal Entries:</strong> All entries (text, image, voice note) are stored on the Arweave network with a unique transaction ID for each entry.<br></br>
+- <strong>Read/Write Operations:</strong> The frontend handles writing new entries to Arweave and reading existing ones based on the unique transaction IDs stored in MongoDB.<br></br>
+
           </p>
         </section>
 
-        <section >
-          <h2 >1.3 Objective(s)/Aim(s)/Target(s)</h2>
-          <p>
-            Display query results in a usable format that can be used by end-users, allowing them to use the data on their front-ends if they wish to create dApps and require a source for their data feed. Keep the indexer live to fetch data from new blocks and append them for future queries. Indexers should work in a decentralized manner, so users are sure the data is not altered or corrupted.
-          </p>
-          <p>
-            Create a responsive website that lets users create multiple subgraphs on EVM chains, indexing events from different smart contracts. Users can choose which events they want to subscribe to. These different subgraphs can be interacted with once they are live to write queries. The website also provides a GraphQL endpoint to fetch queries.
-          </p>
-        </section>
-        <section >
-          <h2 >1.4 Scope</h2>
-          <p>
-          When it comes to storing a large amount of data it is always a hassle. Therefore, storing it on the blockchain ensures that it can’t be altered and it provides consensus algorithm that ensures the data integrity. But when it comes to organize this data, it is quite difficult for example in books, when we want to read a specific page, we have to go through the whole book, reading all its pages one by one. Which takes a lot of time. Instead, we use indexes to retrieve the exact information. 
-          </p>
-          <p>
-          That’s what indexing protocol provides to the end-users. They can retrieve exact information without wasting the time and can query their respective information regarding a blockchain. Our protocol will provide the functionality of “indexers” to index the respective blockchain data. And delegators that will delegate some amount to indexers to index a subgraph. They will be the individuals that maintain the decentralization of the protocol.
-
-          </p>
-        </section>
-
-        <section >
-          <h2>1.5 Business Goals</h2>
-          <p>
-          Google of blockchain directly targets developers. As we aim to provide a decentralized indexing platform for developers to query their data and later use that in their dapps and other decentralized projects.
-          </p>
-        
-        </section>
+       
 
      
       </div>
